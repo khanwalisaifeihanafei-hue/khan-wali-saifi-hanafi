@@ -51,4 +51,15 @@ function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;","
 document.getElementById("saveDemo").onclick=saveDemo;renderSaved();
 function search(){let q=document.getElementById("searchInput").value.toLowerCase().trim();document.querySelectorAll("#categoryGrid .tile").forEach(el=>el.classList.toggle("hidden",q&&!((el.innerText+" "+el.dataset.key).toLowerCase().includes(q))))}
 document.getElementById("searchBtn").onclick=search;document.getElementById("searchInput").addEventListener("input",search);
-</script></body></html>
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+window.siteSupabase = window.supabase.createClient(
+  "https://xvgxvcklecjavxawqtox.supabase.co",
+
+"sb_publishable_ydsXMzD7tcfWGPbUPdG8JQ_fD5_yfKg""
+
+);
+</script>
+</body>
+</html>
