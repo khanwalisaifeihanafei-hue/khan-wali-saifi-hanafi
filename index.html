@@ -127,5 +127,25 @@ document.getElementById("searchBtn").onclick=()=>{const q=document.getElementByI
 document.getElementById("searchInput").addEventListener("input",()=>document.getElementById("searchBtn").click());
 loadPublished();
 </script>
+<script>
+db.auth.onAuthStateChange((event) => {
+  if (event === "PASSWORD_RECOVERY") {
+    setTimeout(async () => {
+      const password = prompt("رمز جدید خود را وارد کنید:");
+      if (!password) return;
+      if (password.length < 6) {
+        alert("رمز باید حداقل ۶ حرف باشد.");
+        return;
+      }
+      const { error } = await db.auth.updateUser({ password });
+      if (error) {
+        alert("خطا: " + error.message);
+      } else {
+        alert("رمز جدید با موفقیت ثبت شد.");
+      }
+    }, 0);
+  }
+});
+</script>
 </body>
 </html>
