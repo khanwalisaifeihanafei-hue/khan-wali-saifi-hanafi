@@ -122,12 +122,33 @@ async function loadPublished(){
  document.getElementById("publishedContent").innerHTML=(data||[]).map(x=>`<article class="tile"><h4>${esc(x.title)}</h4>${x.category?`<p>${esc(x.category)}</p>`:""}<p>${esc(x.description)}</p></article>`).join("");
  document.getElementById("publishedSection").classList.toggle("hidden",!data?.length);
 }
-db.auth.onAuthStateChange(()=>setTimeout(refreshAuthState,0));
+db.auth.onAuthStateChange((event) => {
+  setTimeout(async () => {
+    if (event === "PASSWORD_RECOVERY") {
+      const password = prompt("رمز جدید خود را وارد کنید:");
+      if (!password) return;
+
+      if (password.length < 6) {
+        alert("رمز باید حداقل ۶ حرف باشد.");
+        return;
+      }
+
+      const { error } = await db.auth.updateUser({ password });
+
+      if (error) {
+        alert(error.message);
+      } else {
+        alert("رمز با موفقیت تغییر کرد.");
+      }
+    }
+    refreshAuthState();
+  }, 0);
+});
 document.getElementById("searchBtn").onclick=()=>{const q=document.getElementById("searchInput").value.toLowerCase().trim();document.querySelectorAll("#categoryGrid .tile").forEach(el=>el.classList.toggle("hidden",q&&!((el.innerText+" "+el.dataset.key).toLowerCase().includes(q))))};
 document.getElementById("searchInput").addEventListener("input",()=>document.getElementById("searchBtn").click());
 loadPublished();
 </script>
-<script>
+
 db.auth.onAuthStateChange((event) => {
   if (event === "PASSWORD_RECOVERY") {
     setTimeout(async () => {
