@@ -11,8 +11,9 @@ button,input,textarea{font:inherit}button{cursor:pointer}.wrap{max-width:1200px;
 @media(max-width:850px){.grid{grid-template-columns:repeat(2,1fr)}.tools{grid-template-columns:1fr}.hero{padding:25px}.hero:after{font-size:100px}}
 @media(max-width:520px){.wrap{padding:14px}.top{align-items:flex-start}.actions{flex-wrap:wrap;justify-content:end}.brand h1{font-size:18px}.brand small{font-size:11px}.grid{gap:9px}.tile{padding:14px;min-height:145px}.hero h2{font-size:27px}.hero:after{display:none}.search{flex-direction:column}.search button{width:100%}}
 </style></head>
+<body>
 <img src="https://xvgxvcklecjavxawqtox.supabase.co/storage/v1/object/public/site-files/photo.png.png" alt="خان ولی سیفی حنفی" style="display:block;width:100%;max-width:900px;height:auto;margin:20px auto;border-radius:20px;">
-  <body><main class="wrap">
+  <main class="wrap">
 <header class="top"><div class="brand"><div class="logo">خ</div><div><h1>خان ولی سیفی حنفی</h1><small id="tagline">Khan Wali Saifi Hanafi</small></div></div>
 <div class="actions"><select class="lang" id="language" aria-label="زبان"><option value="fa">فارسی</option><option value="ar">العربية</option><option value="en">English</option></select><button class="btn" id="adminBtn">ورود مدیر</button></div></header>
 <section class="hero"><div class="eyebrow" id="eyebrow">یک خانه دیجیتال برای همه علاقه‌مندی‌ها</div><h2 id="headline">هر چیزی که دوست داری، از همین‌جا آغاز می‌شود.</h2><p id="intro">از تلاوت قرآن و نعت تا خوشنویسی، هنر، فناوری و ابزارهای کاربردی؛ این وب‌سایت فضایی برای یادگیری، هنر و کشف دنیای تازه است.</p><div class="search"><input id="searchInput" placeholder="دنبال چه چیزی می‌گردی؟"><button class="btn primary" id="searchBtn">جست‌وجو</button></div></section>
@@ -31,9 +32,31 @@ button,input,textarea{font:inherit}button{cursor:pointer}.wrap{max-width:1200px;
 <div class="section-head"><div><h3 id="moreTitle">یک فضای رو به رشد</h3><span id="moreSub">امروز شروع می‌کنیم، فردا گسترده‌تر می‌شویم</span></div></div>
 <section class="tools"><article class="feature"><h3 id="featureTitle">محتوای تازه در راه است</h3><p id="featureText">این نسخه، اسکلت اولیه آفاق است. در گام بعدی می‌توانیم برای هر بخش صفحه اختصاصی، جست‌وجوی واقعی، پخش‌کننده صوت، کتابخانه محتوا و ابزارهای تعاملی بسازیم.</p><div class="pills"><span class="pill">فارسی • العربية • English</span><span class="pill">طراحی واکنش‌گرا</span><span class="pill">قابل توسعه</span><span class="pill">مدیریت متمرکز</span></div></article>
 <aside class="side"><h3 id="adminTitle">انتشار محتوا با مدیریت شما</h3><p id="adminText">در نسخه نهایی، فقط مدیر سایت امکان انتشار و ویرایش مطالب را خواهد داشت؛ بازدیدکنندگان می‌توانند محتوا را رایگان مشاهده کنند.</p><button class="btn primary" id="previewBtn">نمایش پنل نمونه</button><p class="note" id="securityNote">دموی فعلی برای نمایش ظاهر است؛ ورود مدیر و ذخیره‌سازی امن هنوز به سرور متصل نشده‌اند.</p></aside></section>
+<section id="publishedSection" class="hidden">
+<div class="section-head"><div><h3>مطالب منتشرشده</h3><span>مطالبی که مدیر منتشر کرده است</span></div></div>
+<div id="publishedContent" class="grid"></div>
+</section>
 <footer class="footer"><span>© 2026 Khan Wali Saifi Hanafi</span><span id="footerText">یادگیری، هنر و فناوری؛ در یک خانه دیجیتال</span></footer>
 </main>
-<div class="modal" id="modal"><div class="dialog"><div style="display:flex;justify-content:space-between;align-items:center"><h3 id="modalTitle">پنل نمونه مدیر</h3><button class="btn" id="closeModal">✕</button></div><p id="modalBody">در نسخه کامل، از این بخش مطالب، فایل‌های صوتی، دسته‌بندی‌ها و صفحات را مدیریت می‌کنی.</p><label id="sampleLabel">عنوان محتوای جدید</label><input id="sampleTitle" placeholder="مثلاً آموزش خوشنویسی"><label id="sampleDescLabel">توضیح کوتاه</label><textarea id="sampleDesc" rows="3" placeholder="شرح محتوا..."></textarea><button class="btn primary" id="saveDemo">ذخیره نمونه در همین مرورگر</button><p class="note" id="saveNote">این ذخیره‌سازی فقط نمایشی و محلی است و هنوز روی سرور عمومی منتشر نمی‌شود.</p><div id="savedList"></div></div></div>
+<div class="modal" id="modal"><div class="dialog">
+<div style="display:flex;justify-content:space-between;align-items:center"><h3>مدیریت سایت</h3><button class="btn" id="closeModal">✕</button></div>
+<div id="authPanel">
+<p>برای مدیریت مطالب با حساب مدیر وارد شوید.</p>
+<label>ایمیل مدیر</label><input id="adminEmail" type="email" autocomplete="username" placeholder="ایمیل مدیر">
+<label>رمز عبور</label><input id="adminPassword" type="password" autocomplete="current-password" placeholder="رمز عبور">
+<button class="btn primary" id="loginBtn">ورود امن مدیر</button><p class="note" id="authMessage">رمز عبور خود را فقط در این فرم وارد کنید.</p>
+</div>
+<div id="adminPanel" class="hidden">
+<div style="display:flex;justify-content:space-between;align-items:center"><p id="signedInAs" class="note"></p><button class="btn" id="logoutBtn">خروج</button></div>
+<h4>افزودن یا ویرایش مطلب</h4>
+<label>عنوان مطلب</label><input id="contentTitle" placeholder="عنوان مطلب">
+<label>دسته‌بندی</label><input id="contentCategory" placeholder="مثلاً قرآن و معارف">
+<label>توضیح مطلب</label><textarea id="contentDescription" rows="4" placeholder="توضیح مطلب"></textarea>
+<label style="display:flex;align-items:center;gap:8px"><input id="contentPublished" type="checkbox" checked style="width:auto"> انتشار برای بازدیدکنندگان</label>
+<button class="btn primary" id="saveContentBtn">ذخیره مطلب</button> <button class="btn hidden" id="cancelEditBtn">لغو ویرایش</button>
+<p class="note" id="adminMessage"></p><hr style="border-color:#ffffff24"><h4>مطالب ثبت‌شده</h4><div id="adminItems"></div>
+</div></div></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 const translations={
 fa:{tag:"دنیایی برای دانستن، آموختن و آفریدن",ey:"یک خانه دیجیتال برای همه علاقه‌مندی‌ها",head:"هر چیزی که دوست داری، از همین‌جا آغاز می‌شود.",intro:"از تلاوت قرآن و نعت تا خوشنویسی، هنر، فناوری و ابزارهای کاربردی؛ این وب‌سایت فضایی برای یادگیری، هنر و کشف دنیای تازه است.",search:"دنبال چه چیزی می‌گردی؟",go:"جست‌وجو",sections:"گوشه‌های آفاق",sub:"مسیر دلخواهت را انتخاب کن",more:"یک فضای رو به رشد",moreSub:"امروز شروع می‌کنیم، فردا گسترده‌تر می‌شویم",ft:"محتوای تازه در راه است",ftx:"این نسخه، اسکلت اولیه آفاق است. در گام بعدی می‌توانیم برای هر بخش صفحه اختصاصی، جست‌وجوی واقعی، پخش‌کننده صوت، کتابخانه محتوا و ابزارهای تعاملی بسازیم.",at:"انتشار محتوا با مدیریت شما",ax:"در نسخه نهایی، فقط مدیر سایت امکان انتشار و ویرایش مطالب را خواهد داشت؛ بازدیدکنندگان می‌توانند محتوا را رایگان مشاهده کنند.",preview:"نمایش پنل نمونه",security:"دموی فعلی برای نمایش ظاهر است؛ ورود مدیر و ذخیره‌سازی امن هنوز به سرور متصل نشده‌اند.",login:"ورود مدیر",modal:"پنل نمونه مدیر",body:"در نسخه کامل، از این بخش مطالب، فایل‌های صوتی، دسته‌بندی‌ها و صفحات را مدیریت می‌کنی.",title:"عنوان محتوای جدید",desc:"توضیح کوتاه",save:"ذخیره نمونه در همین مرورگر",note:"این ذخیره‌سازی فقط نمایشی و محلی است و هنوز روی سرور عمومی منتشر نمی‌شود.",footer:"یادگیری، هنر و فناوری؛ در یک خانه دیجیتال"},
@@ -43,23 +66,66 @@ en:{tag:"A world for learning, creating and exploring",ey:"A digital home for al
 const cats={fa:[["۞","قرآن و معارف","تلاوت، ترجمه، تجوید و دعا"],["♫","نعت و صدا","آثار صوتی و دکلمه‌های الهام‌بخش"],["✒","هنر و خوشنویسی","آموزش خط، گالری و آثار هنرمندان"],["⌘","کامپیوتر و فناوری","مهارت دیجیتال، کدنویسی و هوش مصنوعی"],["⚙","ابزارهای آنلاین","ابزارهای ساده و رایگان روزمره"],["▤","کتابخانه و آموزش","منابع آموزشی و محتوای دانشی"],["✧","طراحی و خلاقیت","ایده‌ها، طرح‌ها و الهام هنری"],["◷","زندگی و برنامه‌ریزی","یادداشت‌ها، برنامه‌ها و مدیریت کارها"]],ar:[["۞","القرآن والمعارف","تلاوة وترجمة وتجويد وأدعية"],["♫","الأناشيد والصوت","أناشيد وإلقاء صوتي ملهم"],["✒","الفن والخط","تعليم الخط ومعرض الأعمال"],["⌘","الحاسوب والتقنية","المهارات الرقمية والبرمجة والذكاء الاصطناعي"],["⚙","أدوات الإنترنت","أدوات يومية مجانية"],["▤","المكتبة والتعليم","مصادر تعليمية ومعرفية"],["✧","التصميم والإبداع","أفكار وتصاميم وإلهام"],["◷","الحياة والتخطيط","ملاحظات وخطط وإدارة المهام"]],en:[["۞","Quran & Learning","Recitation, translation and tajweed"],["♫","Nasheeds & Audio","Audio works and inspiring recitations"],["✒","Art & Calligraphy","Calligraphy lessons and galleries"],["⌘","Computers & Tech","Digital skills, coding and AI"],["⚙","Online Tools","Simple and free everyday tools"],["▤","Library & Learning","Educational and knowledge resources"],["✧","Design & Creativity","Ideas, designs and inspiration"],["◷","Life & Planning","Notes, plans and task management"]]};
 function setLang(l){const t=translations[l];document.documentElement.lang=l;document.documentElement.dir=l==="en"?"ltr":"rtl";for(const [id,key] of Object.entries({tagline:"tag",eyebrow:"ey",headline:"head",intro:"intro",searchInput:"search",searchBtn:"go",sectionsTitle:"sections",sectionsSub:"sub",moreTitle:"more",moreSub:"moreSub",featureTitle:"ft",featureText:"ftx",adminTitle:"at",adminText:"ax",previewBtn:"preview",securityNote:"security",adminBtn:"login",modalTitle:"modal",modalBody:"body",sampleLabel:"title",sampleDescLabel:"desc",saveDemo:"save",saveNote:"note",footerText:"footer"})){const el=document.getElementById(id);if(el){if(el.tagName==="INPUT")el.placeholder=t[key];else el.textContent=t[key]}}document.querySelectorAll("#categoryGrid .tile").forEach((el,i)=>{el.querySelector("h4").textContent=cats[l][i][1];el.querySelector("p").textContent=cats[l][i][2];el.querySelector(".ico").textContent=cats[l][i][0]});}
 document.getElementById("language").addEventListener("change",e=>setLang(e.target.value));
-const modal=document.getElementById("modal");function openModal(){modal.classList.add("show")}function closeModal(){modal.classList.remove("show")}
-document.getElementById("adminBtn").onclick=openModal;document.getElementById("previewBtn").onclick=openModal;document.getElementById("closeModal").onclick=closeModal;modal.addEventListener("click",e=>{if(e.target===modal)closeModal()});
-function saveDemo(){let title=document.getElementById("sampleTitle").value.trim(),desc=document.getElementById("sampleDesc").value.trim();if(!title)return alert("Please enter a title");let items=JSON.parse(localStorage.getItem("afaq_demo_items")||"[]");items.unshift({title,desc});localStorage.setItem("afaq_demo_items",JSON.stringify(items));renderSaved();document.getElementById("sampleTitle").value="";document.getElementById("sampleDesc").value=""}
-function renderSaved(){let items=JSON.parse(localStorage.getItem("afaq_demo_items")||"[]");document.getElementById("savedList").innerHTML=items.map(x=>`<div class="pill" style="display:block;margin-top:8px">${escapeHtml(x.title)} — ${escapeHtml(x.desc)}</div>`).join("")}
-function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
-document.getElementById("saveDemo").onclick=saveDemo;renderSaved();
-function search(){let q=document.getElementById("searchInput").value.toLowerCase().trim();document.querySelectorAll("#categoryGrid .tile").forEach(el=>el.classList.toggle("hidden",q&&!((el.innerText+" "+el.dataset.key).toLowerCase().includes(q))))}
-document.getElementById("searchBtn").onclick=search;document.getElementById("searchInput").addEventListener("input",search);
-</script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
-window.siteSupabase = window.supabase.createClient(
-  "https://xvgxvcklecjavxawqtox.supabase.co",
 
-"sb_publishable_ydsXMzD7tcfWGPbUPdG8JQ_fD5_yfKg""
-
-);
+const modal=document.getElementById("modal");
+function openModal(){modal.classList.add("show");refreshAuthState()}
+function closeModal(){modal.classList.remove("show")}
+document.getElementById("adminBtn").onclick=openModal;
+document.getElementById("previewBtn").onclick=openModal;
+document.getElementById("closeModal").onclick=closeModal;
+modal.addEventListener("click",e=>{if(e.target===modal)closeModal()});
+function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+const db=window.supabase.createClient("https://xvgxvcklecjavxawqtox.supabase.co","sb_publishable_ydsXMzD7tcfWGPbUPdG8JQ_fD5_yfKg");
+const ADMIN_EMAIL="khanwalisaifeihanafei@gmail.com";
+let editingId=null;
+function msg(id,text,bad=false){const e=document.getElementById(id);e.textContent=text;e.style.color=bad?"#ff9b9b":"#b8f3c8"}
+async function refreshAuthState(){
+ const {data:{user}}=await db.auth.getUser();
+ const ok=!!user&&user.email?.toLowerCase()===ADMIN_EMAIL;
+ document.getElementById("authPanel").classList.toggle("hidden",ok);
+ document.getElementById("adminPanel").classList.toggle("hidden",!ok);
+ if(user&&!ok){await db.auth.signOut();msg("authMessage","این حساب اجازه مدیریت ندارد.",true);return}
+ if(ok){document.getElementById("signedInAs").textContent="وارد شده‌اید: "+user.email;await loadAdminItems()}
+}
+document.getElementById("loginBtn").onclick=async()=>{
+ const email=document.getElementById("adminEmail").value.trim(),password=document.getElementById("adminPassword").value;
+ if(!email||!password){msg("authMessage","ایمیل و رمز عبور را وارد کنید.",true);return}
+ const {error}=await db.auth.signInWithPassword({email,password});
+ document.getElementById("adminPassword").value="";
+ if(error){msg("authMessage","ورود ناموفق: "+error.message,true);return}
+ await refreshAuthState();
+};
+document.getElementById("logoutBtn").onclick=async()=>{await db.auth.signOut();clearEditor();refreshAuthState()};
+function clearEditor(){editingId=null;["contentTitle","contentCategory","contentDescription"].forEach(id=>document.getElementById(id).value="");document.getElementById("contentPublished").checked=true;document.getElementById("saveContentBtn").textContent="ذخیره مطلب";document.getElementById("cancelEditBtn").classList.add("hidden")}
+document.getElementById("cancelEditBtn").onclick=clearEditor;
+document.getElementById("saveContentBtn").onclick=async()=>{
+ const title=document.getElementById("contentTitle").value.trim();if(!title){msg("adminMessage","عنوان مطلب را بنویسید.",true);return}
+ const row={title,category:document.getElementById("contentCategory").value.trim(),description:document.getElementById("contentDescription").value.trim(),is_published:document.getElementById("contentPublished").checked,updated_at:new Date().toISOString()};
+ const result=editingId?await db.from("site_contents").update(row).eq("id",editingId):await db.from("site_contents").insert(row);
+ if(result.error){msg("adminMessage","خطا: "+result.error.message,true);return}
+ msg("adminMessage","مطلب ذخیره شد.");clearEditor();await loadAdminItems();await loadPublished();
+};
+async function loadAdminItems(){
+ const {data,error}=await db.from("site_contents").select("*").order("created_at",{ascending:false});
+ if(error){msg("adminMessage","خطا در دریافت مطالب: "+error.message,true);return}
+ document.getElementById("adminItems").innerHTML=(data||[]).map(x=>`<div class="pill" style="display:flex;justify-content:space-between;gap:8px;margin:8px 0"><span>${esc(x.title)} — ${x.is_published?"منتشرشده":"پیش‌نویس"}</span><span><button class="btn" data-edit="${x.id}">ویرایش</button> <button class="btn" data-del="${x.id}">حذف</button></span></div>`).join("")||'<p class="note">هنوز مطلبی ثبت نشده است.</p>';
+}
+document.getElementById("adminItems").addEventListener("click",async e=>{
+ const edit=e.target.closest("[data-edit]"),del=e.target.closest("[data-del]");
+ if(edit){const {data,error}=await db.from("site_contents").select("*").eq("id",edit.dataset.edit).single();if(error){msg("adminMessage",error.message,true);return}
+ editingId=data.id;document.getElementById("contentTitle").value=data.title||"";document.getElementById("contentCategory").value=data.category||"";document.getElementById("contentDescription").value=data.description||"";document.getElementById("contentPublished").checked=!!data.is_published;document.getElementById("saveContentBtn").textContent="ذخیره تغییرات";document.getElementById("cancelEditBtn").classList.remove("hidden")}
+ if(del){if(!confirm("این مطلب حذف شود؟"))return;const {error}=await db.from("site_contents").delete().eq("id",del.dataset.del);if(error){msg("adminMessage","خطا در حذف: "+error.message,true);return}await loadAdminItems();await loadPublished()}
+});
+async function loadPublished(){
+ const {data,error}=await db.from("site_contents").select("id,title,description,category").eq("is_published",true).order("created_at",{ascending:false});
+ if(error){console.warn(error.message);return}
+ document.getElementById("publishedContent").innerHTML=(data||[]).map(x=>`<article class="tile"><h4>${esc(x.title)}</h4>${x.category?`<p>${esc(x.category)}</p>`:""}<p>${esc(x.description)}</p></article>`).join("");
+ document.getElementById("publishedSection").classList.toggle("hidden",!data?.length);
+}
+db.auth.onAuthStateChange(()=>setTimeout(refreshAuthState,0));
+document.getElementById("searchBtn").onclick=()=>{const q=document.getElementById("searchInput").value.toLowerCase().trim();document.querySelectorAll("#categoryGrid .tile").forEach(el=>el.classList.toggle("hidden",q&&!((el.innerText+" "+el.dataset.key).toLowerCase().includes(q))))};
+document.getElementById("searchInput").addEventListener("input",()=>document.getElementById("searchBtn").click());
+loadPublished();
 </script>
 </body>
 </html>
